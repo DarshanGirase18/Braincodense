@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+{% block title %}BrainCondense — Study Less. Understand More.{% endblock %}
+{% block content %}
+
+<!-- ═══════════════════════ WELCOME MODAL ═══════════════════════ -->
+<div id="welcome-overlay" class="wm-overlay" aria-modal="true" role="dialog" aria-label="Welcome to BrainCondense">
+  <div class="wm-card">
+
+    <!-- Scrollable body -->
+    <div class="wm-body" id="wm-body">
+
+      <!-- Header -->
+      <div class="wm-header">
+        <div class="wm-logo">⚡</div>
+        <div class="wm-badge">First time here? 👋</div>
+        <h1 class="wm-title">Welcome to <span class="wm-brand">BrainCondense</span></h1>
+        <p class="wm-tagline"><em>Study Less. Understand More.</em></p>
+      </div>
+
+      <!-- Intro -->
+      <div class="wm-intro">
+        <p>
+          We know how overwhelming hundreds of pages of notes can be before an exam.
+          BrainCondense turns your lengthy study material into
+          <strong>clean, focused, and easy-to-revise Smart Notes</strong> — instantly.
+        </p>
+      </div>
+
+      <!-- Divider -->
+      <div class="wm-divider"></div>
+
+      <!-- How it works -->
+      <div class="wm-section-title">🚀 How Does BrainCondense Work?</div>
+
+      <div class="wm-steps">
+        <div class="wm-step">
+          <div class="wm-step-icon">📄</div>
+          <div class="wm-step-body">
+            <strong>Upload Your Notes</strong>
+            <p>Upload any PDF — lecture notes, textbooks, reference material. We handle the rest.</p>
+          </div>
+        </div>
+        <div class="wm-step">
+          <div class="wm-step-icon">✨</div>
+          <div class="wm-step-body">
+            <strong>Condense Your Notes</strong>
+            <p>BrainCondense processes your document and builds Smart Notes focused on what matters.</p>
+            <ul class="wm-list">
+              <li>Important topics</li>
+              <li>Key points &amp; definitions</li>
+              <li>Structured summaries</li>
+            </ul>
+          </div>
+        </div>
+        <div class="wm-step">
+          <div class="wm-step-icon">📚</div>
+          <div class="wm-step-body">
+            <strong>Organize Your Knowledge</strong>
+            <p>Keep all your condensed notes in one place, easy to find anytime.</p>
+          </div>
+        </div>
+        <div class="wm-step">
+          <div class="wm-step-icon">⚡</div>
+          <div class="wm-step-body">
+            <strong>Revise Faster</strong>
+            <p>Use your Smart Notes for quick revision instead of re-reading the entire document.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="wm-divider"></div>
+
+      <!-- Mindset block -->
+      <div class="wm-mindset">
+        <div class="wm-mindset-label">🎯 Study Smarter, Not Just Harder</div>
+        <div class="wm-mindset-row">
+          <div class="wm-mindset-box wm-mindset-bad">
+            <span class="wm-mindset-cross">✕</span>
+            <p>"How will I finish <em>all these</em> notes?"</p>
+          </div>
+          <div class="wm-mindset-arrow">→</div>
+          <div class="wm-mindset-box wm-mindset-good">
+            <span class="wm-mindset-check">✓</span>
+            <p>"What do I really need to <em>understand</em>?"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="wm-divider"></div>
+
+      <!-- Tip -->
+      <div class="wm-tip">
+        <div class="wm-tip-icon">💡</div>
+        <div>
+          <strong>A Small Tip</strong>
+          <p>Don't just read your Smart Notes.</p>
+          <div class="wm-tip-flow">
+            <span>Read</span>
+            <span class="wm-tip-arrow">→</span>
+            <span>Understand</span>
+            <span class="wm-tip-arrow">→</span>
+            <span>Revise</span>
+            <span class="wm-tip-arrow">→</span>
+            <span>Practice</span>
+          </div>
+          <p class="wm-tip-note">Always verify important concepts with your textbooks and teachers.</p>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="wm-divider"></div>
+
+      <!-- CTA -->
+      <div class="wm-cta-block">
+        <div class="wm-fire">🔥 Your Study Journey Starts Now</div>
+        <p>Upload your first PDF and let BrainCondense simplify the load.</p>
+      </div>
+
+      <!-- Footer of modal -->
+      <div class="wm-modal-footer">
+        <div class="wm-heart">❤️ Thank you for choosing <strong>BrainCondense</strong></div>
+        <p>We're happy to be a part of your learning journey.</p>
+        <p class="wm-author">— By <strong>Darshan Girase</strong></p>
+      </div>
+
+    </div><!-- /wm-body -->
+
+    <!-- Sticky bottom bar -->
+    <div class="wm-actions">
+      <div class="wm-scroll-hint" id="wm-scroll-hint">Scroll to read ↓</div>
+      <a id="wm-cta-btn" class="wm-cta-btn wm-cta-disabled"
+         href="{{ url_for('register') }}"
+         aria-disabled="true"
+         title="Scroll to the bottom to continue"
+         onclick="return document.getElementById('wm-cta-btn').classList.contains('wm-cta-disabled') ? false : true">
+        ⚡ Ready to Condense? Create your account →
+      </a>
+      <p class="wm-cta-hint" id="wm-cta-hint">📖 Read everything first — scroll to the bottom to continue</p>
+      <button class="wm-skip" id="wm-skip">I'll explore first</button>
+    </div>
+
+  </div><!-- /wm-card -->
+</div><!-- /wm-overlay -->
+
+
+<!-- ═══════════════════════ LANDING PAGE ═══════════════════════ -->
+<section class="hero">
+  <h1>
+    Study smarter,<br>
+    <span class="italic-gold">not harder.</span>
+  </h1>
+  <p>
+    BrainCondense pulls out the important topics, highlights key terms, and hands you
+    back a clean, condensed PDF — built for fast revision. No AI key required.
+  </p>
+  <div class="hero-actions">
+    <a class="btn btn-primary" href="{{ url_for('register') }}">Request access →</a>
+    <a class="btn btn-ghost" href="{{ url_for('login') }}">⊙ Sign in</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-pill"><span class="dot"></span> Instant extraction &nbsp;·&nbsp; <span class="val">0 ms delay</span></div>
+    <div class="stat-pill">PDF support &nbsp;·&nbsp; <span class="val">up to 20 MB</span></div>
+    <div class="stat-pill">Topics extracted &nbsp;·&nbsp; <span class="val">heading + keyword</span></div>
+  </div>
+</section>
+
+<div class="preview-card">
+  <div class="preview-card-bar">
+    <div class="preview-dots">
+      <span class="dot-r"></span>
+      <span class="dot-y"></span>
+      <span class="dot-g"></span>
+    </div>
+    <span class="preview-bar-title">BrainCondense · Command</span>
+  </div>
+  <div class="preview-inner">
+    <div class="preview-main-panel">
+      <div class="preview-panel-label">Notes processed · trailing 24h</div>
+      <div class="preview-panel-title">All extractions · <span class="nom">nominal</span></div>
+      <div class="fake-chart">
+        <div class="chart-bar" style="height:35%"></div>
+        <div class="chart-bar" style="height:52%"></div>
+        <div class="chart-bar" style="height:44%"></div>
+        <div class="chart-bar" style="height:68%"></div>
+        <div class="chart-bar" style="height:55%"></div>
+        <div class="chart-bar" style="height:72%"></div>
+        <div class="chart-bar" style="height:60%"></div>
+        <div class="chart-bar" style="height:80%"></div>
+        <div class="chart-bar" style="height:70%"></div>
+        <div class="chart-bar" style="height:90%"></div>
+        <div class="chart-bar" style="height:78%"></div>
+        <div class="chart-bar" style="height:100%"></div>
+        <div class="chart-bar" style="height:85%"></div>
+        <div class="chart-bar" style="height:92%"></div>
+        <div class="chart-bar" style="height:76%"></div>
+        <div class="chart-bar" style="height:88%"></div>
+        <div class="chart-bar" style="height:95%"></div>
+        <div class="chart-bar" style="height:82%"></div>
+      </div>
+    </div>
+    <div class="preview-side">
+      <div class="preview-stat">
+        <div class="preview-stat-label">Avg. Pages</div>
+        <div class="preview-stat-val">14</div>
+      </div>
+      <div class="preview-stat">
+        <div class="preview-stat-label">Topics / PDF</div>
+        <div class="preview-stat-val">~8</div>
+      </div>
+      <div class="preview-stat">
+        <div class="preview-stat-label">Time to notes</div>
+        <div class="preview-stat-val">&lt; 2s</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="how-it-works">
+  <p class="section-label">How it works</p>
+  <h2>Three steps to smarter study sessions.</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">I</div>
+      <h3>Upload your PDF</h3>
+      <p>Drop in your lecture slides or handwritten notes — any PDF up to 20 MB works instantly.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">II</div>
+      <h3>We analyze it</h3>
+      <p>Headings, key terms, and repeated topics are detected automatically in under two seconds.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">III</div>
+      <h3>Download Smart Notes</h3>
+      <p>Get back a concise, highlighted PDF purpose-built for fast, efficient revision.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════ MODAL SCRIPT ═══════════════════════ -->
+<script>
+(function () {
+  const STORAGE_KEY = 'bc_welcome_seen';
+  const overlay    = document.getElementById('welcome-overlay');
+  const skipBtn    = document.getElementById('wm-skip');
+  const scrollHint = document.getElementById('wm-scroll-hint');
+  const ctaBtn     = document.getElementById('wm-cta-btn');
+  const ctaHint    = document.getElementById('wm-cta-hint');
+  const body       = document.getElementById('wm-body');
+
+  // Only show on first visit
+  if (!localStorage.getItem(STORAGE_KEY)) {
+    overlay.classList.add('wm-visible');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    localStorage.setItem(STORAGE_KEY, '1');
+    overlay.classList.add('wm-hiding');
+    document.body.style.overflow = '';
+    setTimeout(() => overlay.remove(), 400);
+  }
+
+  skipBtn.addEventListener('click', closeModal);
+
+  // Enable CTA once user scrolls within 40px of the bottom
+  function checkScroll() {
+    const distFromBottom = body.scrollHeight - body.scrollTop - body.clientHeight;
+
+    // Hide scroll hint after first scroll
+    if (body.scrollTop > 40) scrollHint.style.opacity = '0';
+
+    // Unlock button when near bottom
+    if (distFromBottom < 40 && ctaBtn.classList.contains('wm-cta-disabled')) {
+      ctaBtn.classList.remove('wm-cta-disabled');
+      ctaBtn.removeAttribute('aria-disabled');
+      ctaBtn.removeAttribute('title');
+      ctaHint.classList.add('wm-cta-hint-done');
+    }
+  }
+
+  body.addEventListener('scroll', checkScroll, { passive: true });
+
+  // Edge case: if content is too short to scroll, unlock immediately
+  if (body.scrollHeight <= body.clientHeight) {
+    ctaBtn.classList.remove('wm-cta-disabled');
+    ctaBtn.removeAttribute('aria-disabled');
+    ctaHint.classList.add('wm-cta-hint-done');
+  }
+})();
+</script>
+
+{% endblock %}

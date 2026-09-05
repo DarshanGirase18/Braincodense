@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Profile — BrainCondense{% endblock %}
+{% block content %}
+
+<div class="profile-page">
+
+  <!-- Header -->
+  <div class="profile-header">
+    <div class="eyebrow">My Account</div>
+    <h1>Your Profile.</h1>
+    <p>Manage your display picture, username, and email.</p>
+  </div>
+
+  <div class="profile-grid">
+
+    <!-- ── Avatar Card ───────────────────────────────────────── -->
+    <div class="profile-card avatar-card">
+      <div class="card-section-label">Display Picture</div>
+
+      <div class="avatar-preview-wrap">
+        {% if avatar_url %}
+          <img id="avatar-preview" src="{{ avatar_url }}" alt="Your avatar" class="avatar-preview">
+        {% else %}
+          <div id="avatar-preview-placeholder" class="avatar-preview-placeholder">
+            {{ user['username'][0].upper() }}
+          </div>
+          <img id="avatar-preview" src="" alt="Your avatar"
+               class="avatar-preview" style="display:none;">
+        {% endif %}
+        <div class="avatar-badge" title="Click below to change">
+          📸
+        </div>
+      </div>
+
+      <form method="POST" action="{{ url_for('profile') }}"
+            enctype="multipart/form-data" id="avatar-form">
+
+        <div class="avatar-upload-zone" id="avatar-drop-zone">
+          <input type="file" id="avatar-input" name="avatar"
+                 accept="image/png,image/jpeg,image/gif,image/webp"
+                 onchange="previewAvatar(this)">
+          <div class="avatar-upload-label">
+            <span class="avatar-upload-icon">⬆</span>
+            <strong id="avatar-upload-text">Choose a photo</strong>
+            <span>PNG, JPG, GIF or WEBP · max 20 MB</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary avatar-save-btn" type="submit" id="avatar-save-btn"
+                style="display:none;">
+          Save avatar →
+        </button>
+      </form>
+
+      {% if avatar_url %}
+      <form method="POST" action="{{ url_for('profile') }}" id="remove-avatar-form">
+        <input type="hidden" name="remove_avatar" value="1">
+        <button type="submit" class="btn btn-small btn-danger remove-avatar-btn"
+                onclick="return confirm('Remove your display picture?')">
+          ✕ Remove photo
+        </button>
+      </form>
+      {% endif %}
+    </div>
+
+    <!-- ── Info Card ─────────────────────────────────────────── -->
+    <div class="profile-card info-card">
+      <div class="card-section-label">Account Details</div>
+
+      <form method="POST" action="{{ url_for('profile') }}"
+            enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label for="prof-username">Username</label>
+          <input id="prof-username" type="text" name="username"
+                 value="{{ user['username'] }}" required>
+        </div>
+
+        <div class="form-group">
+          <label for="prof-email">Email</label>
+          <input id="prof-email" type="email" name="email"
+                 value="{{ user['email'] }}" required>
+        </div>
+
+        <!-- Hidden: no avatar file, so only text fields get updated -->
+        <div class="profile-meta-row">
+          <span class="meta-item">
+            🗓 Member since
+            <strong>{{ user['created_at'][:10] }}</strong>
+          </span>
+        </div>
+
+        <button class="btn btn-primary" type="submit" id="info-save-btn">
+          Save changes →
+        </button>
+      </form>
+
+      <!-- Change password section -->
+      <div class="divider"></div>
+
+      <div class="card-section-label">Security</div>
+      <a href="{{ url_for('logout') }}" class="btn btn-ghost btn-small">
+        Sign out of all sessions
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function previewAvatar(input) {
+    const file = input.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const preview     = document.getElementById('avatar-preview');
+      const placeholder = document.getElementById('avatar-preview-placeholder');
+      const saveBtn     = document.getElementById('avatar-save-btn');
+      const uploadText  = document.getElementById('avatar-upload-text');
+
+      preview.src           = e.target.result;
+      preview.style.display = 'block';
+      if (placeholder) placeholder.style.display = 'none';
+
+      saveBtn.style.display  = 'flex';
+      uploadText.textContent = file.name;
+
+      // Highlight drop zone
+      document.getElementById('avatar-drop-zone').classList.add('has-file');
+    };
+    reader.readAsDataURL(file);
+  }
+</script>
+
+{% endblock %}

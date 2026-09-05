@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="BrainCondense — Transform messy lecture PDFs into clean, concise Smart Notes. Instant heading & keyword extraction, no AI key required.">
+  <title>{% block title %}BrainCondense — Smart Notes from any PDF{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <a class="brand" href="{{ url_for('index') }}">
+      <div class="brand-icon">⚡</div>
+      BrainCondense
+    </a>
+    <div class="nav-links">
+      {% if session.get('user_id') %}
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('profile') }}" class="nav-profile-link">
+          {% if g_avatar_url %}
+            <img src="{{ g_avatar_url }}" alt="Avatar" class="nav-avatar">
+          {% else %}
+            <div class="nav-avatar-placeholder">{{ session.get('username', 'U')[0].upper() }}</div>
+          {% endif %}
+          <span class="nav-username">{{ session.get('username') }}</span>
+        </a>
+        <a href="{{ url_for('logout') }}">Sign out</a>
+      {% else %}
+        <a href="{{ url_for('login') }}">Sign in</a>
+        <a class="btn-nav-cta" href="{{ url_for('register') }}">Request access →</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main class="container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-wrap">
+          {% for category, message in messages %}
+            <div class="flash flash-{{ category }}">
+              {% if category == 'success' %}✓{% else %}⚠{% endif %}
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-icon">⚡</div>
+        <span class="footer-brand-name">BrainCondense</span>
+      </div>
+      <p class="footer-copy">
+        &copy; {{ 2026 }} BrainCondense &nbsp;·&nbsp; All rights reserved
+      </p>
+      <p class="footer-credit">
+        Developed &amp; Designed by <strong>Darshan Girase</strong>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
